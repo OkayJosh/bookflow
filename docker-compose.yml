@@ -12,7 +12,7 @@ services:
       - ./staticfiles:/bookflow/staticfiles
     depends_on:
       - db
-    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+    command: ["./entrypoint.sh"]
 
   # PostgreSQL database service
   db:
