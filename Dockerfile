@@ -19,5 +19,8 @@ RUN pip install --no-cache-dir psycopg2-binary
 # Change permissions for staticfiles directory
 RUN chmod -R 775 /bookflow/staticfiles
 
-# Run entrypoint script
-CMD ["/bookflow/entrypoint.sh"]
+# Set executable permissions for entrypoint.sh
+RUN chmod +x /bookflow/entrypoint.sh
+
+# Set the entry point
+ENTRYPOINT ["/bookflow/entrypoint.sh"]
