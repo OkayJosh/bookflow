@@ -1,0 +1,17 @@
+# Exclude Python bytecode files
+*.pyc
+
+# Exclude development and system files
+__pycache__
+.DS_Store
+*.log
+
+# Exclude media and static files (assuming they are served separately)
+/media
+
+# Exclude database files (if not managed by Docker)
+db.sqlite3
+
+# Exclude virtual environment
+bookflow/
+bookflow1/
