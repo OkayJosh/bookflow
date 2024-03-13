@@ -1,0 +1,68 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Search</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<div class="container">
+<a href="{% url 'admin_list_students' %}">View Students</a>
+  <h1>Book Search</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ search_form.as_p }}
+    <button type="submit">Search</button>
+  </form>
+
+  <h2>Rented Books</h2>
+<ul>
+  {% for rental in rented_books %}
+    <li>
+      {{ rental.book_id.title }} - Return Date: {{ rental.return_date }} - Fee(s): ${{ rental.fee_amount | default:0 }}
+      <form method="post" action="{% url 'book_rent_extension' %}">
+        {% csrf_token %}
+        <input type="hidden" name="rental_id" value="{{ rental.rental_id }}">
+        <label for="return_date">New Return Date:</label>
+        <input type="date" name="return_date" id="return_date">
+        <button type="submit">Extend Rental</button>
+      </form>
+    </li>
+  {% empty %}
+    <li>No books rented yet.</li>
+  {% endfor %}
+</ul>
+
+
+  <h2>Search Results</h2>
+{% if search_results %}
+  <ul>
+    {% for book in search_results %}
+      <li>
+        <form id="rent_form_{{ forloop.counter }}" action="{% url 'book_rent' %}" method="post" style="display: none;">
+          {% csrf_token %}
+            <input type="hidden" name="student_id" value="{{ user }}">
+          <input type="hidden" name="title" value="{{ book.title }}">
+          <input type="hidden" name="author" value="{{ book.author_name.1 | default:'BOOKFLOW' }}">
+          <input type="hidden" name="page_count" value="{{ book.number_of_pages_median | default:100 }}">
+          <input type="hidden" name="isbn" value="{{ book.isbn.1  | default:'124567890'}}">
+            <input type="hidden" name="return_date" value="{{ default_return_date }}">
+          <button type="submit">Rent</button>
+        </form>
+        {{ book.title }} by {{ book.author }} -
+        <button onclick="document.getElementById('rent_form_{{ forloop.counter }}').submit()">Rent</button>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No results found.</p>
+{% endif %}
+
+  <a href="{% url 'logout' %}">Logout</a>
+</div>
+</body>
+</html>

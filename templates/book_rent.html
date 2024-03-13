@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Rent</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<div class="container">
+  <h1>Book Rent</h1>
+
+  <h2>Rent a Book</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ rent_form.as_p }}
+    <button type="submit">Rent</button>
+  </form>
+
+  {% if book_rented %}
+    <h2>Book Rented</h2>
+    <p>{{ book_rented.title }} by {{ book_rented.author }} has been successfully rented.</p>
+    <!-- Add any additional information about the rented book here -->
+  {% endif %}
+
+<a href="{% url 'book_search' %}">Back to Book Search</a>
+<p></p>
+<a href="{% url 'admin_borrowed_books' book_rented.student_id.student_id %}">Back to Borrowed book(s) for user {{ book_rented.student_id.student_id }}</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Rent Extension</title>
+    <!-- Add your CSS links here -->
+</head>
+<body>
+    <h1>Extend Book Rental</h1>
+
+    {% if book_rented %}
+        <p>Book rental extended successfully. New return date: {{ book_rented.return_date }}</p>
+        <p>You will pay ${{ book_rented.fee_amount }}</p>
+    {% endif %}
+
+<a href="{% url 'book_search' %}">Back to Book Search</a>
+<p></p>
+<a href="{% url 'admin_borrowed_books' book_rented.student_id.student_id %}">Back to Borrowed book(s) for user {{ book_rented.student_id.student_id }}</a>
+</body>
+</html>
