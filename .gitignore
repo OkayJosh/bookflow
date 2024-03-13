@@ -9,6 +9,7 @@ __pycache__/
 *.pyc
 db.sqlite3
 /static/
+/staticfiles/
 /media/
 
 # Ignore the virtual environment
