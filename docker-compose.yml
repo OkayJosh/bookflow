@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  # Bookflow app service
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./staticfiles:/bookflow/staticfiles
+    depends_on:
+      - db
+    command: ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+  # PostgreSQL database service
+  db:
+    image: postgres:latest
+    volumes:
+      - "./.local/postgres:/var/lib/postgresql/data:delegated"  # Change $PWD to ./ for Windows
+    environment:
+      POSTGRES_DB: bookflow
+      POSTGRES_USER: bookflow
+      POSTGRES_PASSWORD: bookflow
+    ports:
+      - "${DB_PORT}:5432"
