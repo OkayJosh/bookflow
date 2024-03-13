@@ -14,8 +14,8 @@ Before you start, ensure you have the following installed:
 1. Clone this repository:
 
     ```bash
-    git clone https://github.com/your-username/your-django-app.git
-    cd Bookflow
+    git clone https://github.com/OkayJosh/bookflow.git
+    cd bookflow
     ```
 
 2. Copy a `.env.tp` file in the project root and create a new file as `.env` with the content:
