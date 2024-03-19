@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 from unittest.mock import patch
 
 from django.contrib.auth.hashers import make_password

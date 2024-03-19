@@ -2,7 +2,6 @@ import calendar
 import datetime
 from datetime import timedelta
 
-import pytz
 import requests
 from django.http import HttpResponse
 import logging
