@@ -9,10 +9,10 @@
   <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    <h1>List of Students</h1>
+    <h1 class="screen-1">List of Students</h1>
     <ul>
         {% for student in students %}
-            <li><a href="{% url 'admin_borrowed_books' student.student_id %}">{{ student.username }}</a></li>
+            <li class="email"><a href="{% url 'admin_borrowed_books' student.student_id %}">{{ student.username }}</a></li>
         {% endfor %}
     </ul>
 </body>
