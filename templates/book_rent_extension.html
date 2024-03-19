@@ -1,9 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Book Rent Extension</title>
-    <!-- Add your CSS links here -->
+  <meta charset="UTF-8">
+  <title>Book Rent Extensions</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <h1>Extend Book Rental</h1>
@@ -13,8 +16,9 @@
         <p>You will pay ${{ book_rented.fee_amount }}</p>
     {% endif %}
 
-<a href="{% url 'book_search' %}">Back to Book Search</a>
-<p></p>
-<a href="{% url 'admin_borrowed_books' book_rented.student_id.student_id %}">Back to Borrowed book(s) for user {{ book_rented.student_id.student_id }}</a>
+<a href="{% url 'book_search' %}">Back to Book Search</a> <br>
+<p>
+    <a href="{% url 'admin_borrowed_books' user.student_id %}">Back to Borrowed book(s) for user {{ user.student_id }}</a>
+</p>
 </body>
 </html>
